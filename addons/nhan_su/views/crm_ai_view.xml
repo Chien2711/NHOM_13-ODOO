@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="crm_lead_view_form_inherit_ai" model="ir.ui.view">
+            <field name="name">crm.lead.form.inherit.ai</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//header" position="inside">
+                    <button name="action_ai_goi_y_va_tao_viec" string="🤖 AI Phân Tích &amp; Giao Việc" type="object" class="oe_highlight"/>
+                </xpath>
+                
+                <xpath expr="//field[@name='user_id']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                
+                <xpath expr="//field[@name='user_id']" position="after">
+                    <field name="nhan_vien_qlns_id" options="{'no_create': True, 'no_open': True}"/>
+                </xpath>
+                
+                <xpath expr="//notebook" position="inside">
+                    <page string="Lắng nghe &amp; AI Gợi ý" name="ai_analysis_page">
+                        <group>
+                            <field name="x_yeu_cau_khach_hang" placeholder="VD: Khách hàng cần hệ thống quét mã vạch kho..."/>
+                            <field name="x_san_pham_goi_y"/>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_task_form_inherit_qlns" model="ir.ui.view">
+            <field name="name">project.task.form.inherit.qlns</field>
+            <field name="model">project.task</field>
+            <field name="inherit_id" ref="project.view_task_form2"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='user_ids']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                
+                <xpath expr="//field[@name='user_ids']" position="after">
+                    <field name="nhan_vien_qlns_id" options="{'no_create': True}"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

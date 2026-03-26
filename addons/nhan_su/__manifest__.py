@@ -20,7 +20,12 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base'],
+    'depends': [
+        'base',
+        'hr',        # Kế thừa nhân sự 
+        'crm',       # Kế thừa quản lý khách hàng [cite: 5]
+        'project',   # Kế thừa quản lý công việc [cite: 5]
+        ],
 
     # always loaded
     'data': [
@@ -31,6 +36,9 @@
         'views/lich_su_cong_tac.xml',
         'views/chung_chi_bang_cap.xml',
         'views/danh_sach_chung_chi_bang_cap.xml',
+
+        'views/crm_ai_view.xml',
+        'views/tai_san.xml',
         'views/menu.xml',
     ],
     # only loaded in demonstration mode

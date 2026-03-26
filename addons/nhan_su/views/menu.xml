@@ -49,5 +49,10 @@
             sequence="4"
             action="action_danh_sach_chung_chi_bang_cap"
         />
+        <menuitem id="menu_quan_ly_tai_san" 
+              name="Quản lý tài sản" 
+              parent="menu_root"  action="action_quan_ly_tai_san" 
+              sequence="5" 
+        />
     </data>
 </odoo>

@@ -77,3 +77,11 @@ class NhanVien(models.Model):
         for record in self:
             if record.tuoi < 18:
                 raise ValidationError("Tuổi không được bé hơn 18")
+
+    x_chuyen_mon = fields.Selection([
+        ('sales', 'Kinh doanh / Báo giá'),
+        ('tech', 'Kỹ thuật / Bảo trì'),
+        ('support', 'Chăm sóc khách hàng')
+    ], string="Chuyên môn (AI)", default='sales')
+    tai_san_ids = fields.One2many('qlns.tai.san', 'nhan_vien_id', string="Tài sản đang giữ")
+    ky_nang_ids = fields.One2many('qlns.ky.nang', 'nhan_vien_id', string="Danh sách Kỹ năng")

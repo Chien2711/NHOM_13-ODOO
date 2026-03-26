@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_tai_san_tree_tong" model="ir.ui.view">
+        <field name="name">tai.san.tree.tong</field>
+        <field name="model">qlns.tai.san</field>
+        <field name="arch" type="xml">
+            <tree string="Danh sách Tài sản">
+                <field name="ma_tai_san"/>
+                <field name="name"/>
+                <field name="nhan_vien_id" string="Người đang giữ"/> 
+                <field name="ngay_cap"/>
+                <field name="trang_thai" widget="badge" decoration-success="trang_thai=='dang_dung'" decoration-danger="trang_thai=='hong'" decoration-warning="trang_thai=='thu_hoi'"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_tai_san_form_tong" model="ir.ui.view">
+        <field name="name">tai.san.form.tong</field>
+        <field name="model">qlns.tai.san</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="ma_tai_san"/>
+                        </group>
+                        <group>
+                            <field name="nhan_vien_id"/>
+                            <field name="ngay_cap"/>
+                            <field name="trang_thai"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_quan_ly_tai_san" model="ir.actions.act_window">
+        <field name="name">Toàn bộ Tài sản</field>
+        <field name="res_model">qlns.tai.san</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

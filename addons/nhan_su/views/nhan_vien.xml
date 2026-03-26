@@ -18,6 +18,9 @@
                             <field name="so_nguoi_bang_tuoi"/>
                             <field name="que_quan"/>
                             <field name="email"/>
+                            
+                            <field name="x_chuyen_mon" widget="radio" options="{'horizontal': true}"/>
+                            
                             <field name="anh" widget="image"/>
                         </group>
                         <notebook>
@@ -28,8 +31,27 @@
                                 <field name="danh_sach_chung_chi_bang_cap_ids"/>
                             </page>
                         </notebook>
+                        <notebook>
+                            <page string="Tài sản công ty cấp">
+                                <field name="tai_san_ids">
+                                    <tree editable="bottom">
+                                        <field name="ma_tai_san" placeholder="VD: LPT-001"/>
+                                        <field name="name" placeholder="VD: Laptop Dell..."/>
+                                        <field name="ngay_cap"/>
+                                        <field name="trang_thai" widget="badge" decoration-success="trang_thai=='dang_dung'" decoration-danger="trang_thai=='hong'" decoration-warning="trang_thai=='thu_hoi'"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Đánh giá Kỹ năng">
+                                <field name="ky_nang_ids">
+                                    <tree editable="bottom">
+                                        <field name="name" placeholder="VD: Lập trình Python, Thuyết trình..."/>
+                                        <field name="muc_do"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
                     </sheet>
-                    
                 </form>
             </field>
         </record>
@@ -48,11 +70,14 @@
                     <field name="so_nguoi_bang_tuoi"/>
                     <field name="que_quan"/>
                     <field name="email"/>
+                    
+                    <field name="x_chuyen_mon" decoration-info="x_chuyen_mon == 'sales'" decoration-danger="x_chuyen_mon == 'tech'"/>
                 </tree>
             </field>
         </record>
 
         <record model="ir.ui.view" id="nhan_vien_search">
+            <field name="name">nhan_vien.search</field>
             <field name="model">nhan_vien</field>
             <field name="arch" type="xml">
                 <search>
@@ -62,6 +87,12 @@
                     <field name="tuoi"/>
                     <field name="que_quan"/>
                     <field name="email"/>
+                    
+                    <field name="x_chuyen_mon"/>
+                    
+                    <group expand="0" string="Group By">
+                        <filter string="Chuyên môn" name="group_by_chuyen_mon" context="{'group_by': 'x_chuyen_mon'}"/>
+                    </group>
                 </search>
             </field>
         </record>
@@ -69,10 +100,40 @@
         <record id="action_nhan_vien" model="ir.actions.act_window">
             <field name="name">Nhân viên</field>
             <field name="res_model">nhan_vien</field>
-            <field name="view_mode">tree,form</field>
-            <field name="search_view_id" ref = "nhan_vien_search"/>
+            <field name="view_mode">tree,form,graph,pivot</field>
+            <field name="search_view_id" ref="nhan_vien_search"/>
         </record>
     </data>
+    <record id="view_nhan_vien_search_xin" model="ir.ui.view">
+            <field name="name">nhan.vien.search.xin</field>
+            <field name="model">nhan_vien</field>
+            <field name="arch" type="xml">
+                <search string="Tìm kiếm nhân viên">
+                    <field name="ho_va_ten" string="Tên nhân viên"/>
+                    <field name="x_chuyen_mon"/>
+                    <field name="que_quan"/>
+                    <separator/>
+                    <filter string="Nhóm theo Chuyên môn" name="group_chuyen_mon" context="{'group_by':'x_chuyen_mon'}"/>
+                    <filter string="Nhóm theo Quê quán" name="group_que_quan" context="{'group_by':'que_quan'}"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="view_nhan_vien_graph_xin" model="ir.ui.view">
+            <field name="name">nhan.vien.graph.xin</field>
+            <field name="model">nhan_vien</field>
+            <field name="arch" type="xml">
+                <graph string="Báo cáo Thống kê Nhân sự" type="bar" stacked="True">
+                    <field name="x_chuyen_mon" type="row"/> <field name="que_quan" type="col"/> </graph>
+            </field>
+        </record>
+
+        <record id="view_nhan_vien_pivot_xin" model="ir.ui.view">
+            <field name="name">nhan.vien.pivot.xin</field>
+            <field name="model">nhan_vien</field>
+            <field name="arch" type="xml">
+                <pivot string="Bảng Phân tích Nhân sự">
+                    <field name="x_chuyen_mon" type="row"/> <field name="que_quan" type="col"/> </pivot>
+            </field>
+        </record>
 </odoo>
-        
-    

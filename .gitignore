@@ -1,53 +1,60 @@
-# sphinx build directories
-_build/
-
-# dotfiles
-.*
-!.gitignore
-!.github
-!.mailmap
-# compiled python files
+# ==========================================
+# ODOO & PYTHON SPECIFIC
+# ==========================================
+# Loại bỏ các file Python đã biên dịch (không cần thiết trên Git)
 *.py[co]
 __pycache__/
-# setup.py egg_info
+*.so
 *.egg-info
-# emacs backup files
+dist/
+build/
+
+# Loại bỏ kho lưu trữ dữ liệu của Odoo (Filestore)
+# Rất quan trọng: Không đẩy ảnh/file upload của local lên Git
+odoo/filestore/
+odoo/sessions/
+*.log
+
+# Cấu hình server (Chứa mật khẩu DB, thông số port - Tuyệt đối không share)
+odoo.conf
+*.conf
+
+# ==========================================
+# IDE & EDITORS (VS Code, PyCharm, v.v.)
+# ==========================================
+.vscode/
+.idea/
+*.swp
 *~
-# hg stuff
-*.orig
-status
-# odoo filestore
-odoo/filestore
-# maintenance migration scripts
-odoo/addons/base/maintenance
-# window installation config file
-/odoo.conf
+.history/
 
-# generated for windows installer?
-install/win32/*.bat
-install/win32/meta.py
-
-# needed only when building for win32
-setup/win32/static/less/
-setup/win32/static/wkhtmltopdf/
-setup/win32/static/postgresql*.exe
-
-# js tooling
-node_modules
-jsconfig.json
-tsconfig.json
+# ==========================================
+# VIRTUAL ENVIRONMENTS & TOOLS
+# ==========================================
+venv/
+.venv/
+env/
+bin/
+lib/
+share/
+include/
+node_modules/
 package-lock.json
-package.json
-.husky
 
-# various virtualenv
-/bin/
-/build/
-/dist/
-/include/
-/lib/
-/man/
-/share/
-/src/
-/venv/
-/venv_15_01/
+# ==========================================
+# SYSTEM & TEMP FILES
+# ==========================================
+# File rác của MacOS và Linux
+.DS_Store
+.directory
+.Trash-*
+*.tmp
+*.temp
+
+# ==========================================
+# DATA & EXPORTS (Tránh đẩy dữ liệu test bừa bãi)
+# ==========================================
+*.csv
+*.xlsx
+*.sql
+!security/ir.model.access.csv  # Ngoại lệ: Giữ lại file phân quyền của bạn
